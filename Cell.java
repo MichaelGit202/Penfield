@@ -18,7 +18,7 @@ public class Cell {
         Ship = ship;
     }
 
-    public boolean isHit() {
+    public boolean getHit() {
         return hit;
     }
 

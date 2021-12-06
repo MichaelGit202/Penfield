@@ -13,7 +13,15 @@ public class BattleShip {
         int amount = input.nextInt();
         placeBoats(Players, amount, input);
 
+        boolean win = false;
+        while(win = false){
+            ///pl_shoot(Players[]);
+        }
 
+    }
+
+    public static void pl_shoot(player Pl){
+        Pl.getBoard().print(true);
     }
 
     public static ArrayList<player> getPlayers(Scanner s){
@@ -97,7 +105,7 @@ public class BattleShip {
         boolean acceptible = false;
         Board tempBoard = new Board(play.getBoard().getRows(), play.getBoard().getCols());///play.getBoard().Copy();
         tempBoard.Paste(play.getBoard());
-        play.getBoard().print();
+        play.getBoard().print(false);
         System.out.println("Place at a specific spot: rows, colums");
         System.out.println("Rows:");
         int[] tmp = s.getOrigin();
@@ -106,7 +114,7 @@ public class BattleShip {
         tmp[1] = input.nextInt();
         boolean chk = false;
         while (chk == false) {
-            System.out.println("Confirm placement: enter 'P' to place add more options");
+
             tmp = s.getOrigin();
             switch (inp) {
                 case"T":
@@ -125,10 +133,20 @@ public class BattleShip {
                     tmp[1] = tmp[1] - 1;
                     s.setOrigin(tmp);
                     break;
+                case"N":
+                    s.setShipDirection(ship.direction.North);
+                    break;
+                case"E":
+                    s.setShipDirection(ship.direction.east);
+                    break;
+                case"S":
+                    s.setShipDirection(ship.direction.south);
+                    break;
+                case"W":
+                    s.setShipDirection(ship.direction.west);
+                    break;
             }
-            System.out.println("1");
             if (inp.equals("P")){
-                System.out.println("2");
                 if (acceptible == false) {
                     int[] z = s.getOrigin();
                     System.out.println("Cannot place ship here: " + z[0] + "," + z[1]);
@@ -144,11 +162,12 @@ public class BattleShip {
                     System.out.println("3");
                 tempBoard.Paste(play.getBoard());
                 acceptible = tempBoard.placeShip(s);
-                tempBoard.print();
+                tempBoard.print(false);
+                System.out.println("Confirm placement: enter 'P' to place,\n 'T' to go up,\n 'G' to go down,\n 'F' to go left, \n 'H' to go right, \n and NESW to change cardinal direction");
+                int[] g = s.getOrigin();
+                System.out.println(g[0] + ","+ g[1]);
                 inp = input.next();
                 inp = inp.toUpperCase(Locale.ROOT);}
-
-
         }
 
     }

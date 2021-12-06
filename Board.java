@@ -86,13 +86,19 @@ public class Board {
         }
     }
 
-    public void print(){
+    public void print(boolean hide){
         for(int i = 0; i < field.size(); i++)
         {
             for(int j = 0; j < field.size(); j++)
             {
                 System.out.print(" ");
-                System.out.print(field.get(i).get(j).getDispChar());
+                if (hide == false){
+                    System.out.print(field.get(i).get(j).getDispChar());
+                }else{
+                    if (field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == false){System.out.println("~");
+                    }else if(field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == true){System.out.println(field.get(i).get(j).getDispChar());
+                    }
+                }
                 System.out.print(" ");
             }
             System.out.println();

@@ -4,7 +4,7 @@ public class player {
     private String Name;
     private Board board;
     public Board getBoard() {
-        return board;
+        return this.board;
     }
 
     public void setBoard(Board board) {
