@@ -51,7 +51,7 @@ public class Board {
                         return false;
                     } else {
                         this.field.get(pl[0] - i).get(pl[1]).setShip(Ship);
-                    }                                                             ///xor is false xor true = true
+                    }
                     break;
                 case east:
                     if (pl[1] + i > rows - 1) {
@@ -60,7 +60,7 @@ public class Board {
                         return false;
                     } else {
                         this.field.get(pl[0]).get(pl[1] + i).setShip(Ship);
-                    }                                                             ///xor is false xor true = true
+                    }
                     break;
                 case west:
                     if (pl[1] - i < 0) {
@@ -69,14 +69,14 @@ public class Board {
                         return false;
                     } else {
                         this.field.get(pl[0]).get(pl[1] - i).setShip(Ship);
-                    }                                                             ///xor is false xor true = true
+                    }
                     break;
                 case south:
                     if(pl[0] + i > cols - 1){
                         return false;
                     } else if (this.field.get(pl[0]+ i).get(pl[1] ).getShip() != null){
                         return false;
-                    }else{this.field.get(pl[0]+ i).get(pl[1]).setShip(Ship);}                                                             ///xor is false xor true = true
+                    }else{this.field.get(pl[0]+ i).get(pl[1]).setShip(Ship);}
                     break;
                  }
             i++;}

@@ -16,14 +16,20 @@ public class BattleShip {
         boolean win = false;
         while(win = false){
             for(player P: Players) {
-                pl_shoot(P);
+                for (int i = 0; i < Players.size(); i++){}
+                pl_shoot(P, input);
             }
         }
 
     }
 
-    public static void pl_shoot(player Pl){
+    public static void pl_shoot(player Pl,Scanner input){
         Pl.getBoard().print(true);
+        int inp[] = null;
+        System.out.println("Cols");
+        inp[0] = input.nextInt();
+        System.out.println("Rows");
+        inp[1] = input.nextInt();
 
     }
 
