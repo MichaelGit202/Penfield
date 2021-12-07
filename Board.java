@@ -32,40 +32,54 @@ public class Board {
     public boolean placeShip(ship Ship){
         int[] pl = Ship.getOrigin();
         int i = 0;
+
+        if(pl[0] < 0){              ///checks to see if the input is out of bounds
+            return false;
+        }else if(pl[1] >  rows){
+            return false;
+        }else if(pl[1]  < 0){
+            return false;
+        } if(pl[0]  > cols){
+            return false;}
+
         while (i < Ship.getLength()) {
-            switch(Ship.getShipDirection()){
+            switch(Ship.getShipDirection()) {
                 case North:
-                    if(pl[0] - i < 0){
+                    if (pl[0] - i < 0) {
                         return false;
-                    }else if (this.field.get(pl[0]- i).get(pl[1]).getShip() != null){
-                            return false;
-                    }else{this.field.get(pl[0]- i).get(pl[1]).setShip(Ship);}                                                             ///xor is false xor true = true
+                    } else if (this.field.get(pl[0] - i).get(pl[1]).getShip() != null) {
+                        return false;
+                    } else {
+                        this.field.get(pl[0] - i).get(pl[1]).setShip(Ship);
+                    }                                                             ///xor is false xor true = true
                     break;
                 case east:
-                    if(pl[1] + i < 0){
+                    if (pl[1] + i > rows - 1) {
                         return false;
-                    }else if (this.field.get(pl[0]).get(pl[1] + i).getShip() != null){
+                    } else if (this.field.get(pl[0]).get(pl[1] + i).getShip() != null) {
                         return false;
-                    }else{this.field.get(pl[0]).get(pl[1] +i).setShip(Ship);}                                                             ///xor is false xor true = true
+                    } else {
+                        this.field.get(pl[0]).get(pl[1] + i).setShip(Ship);
+                    }                                                             ///xor is false xor true = true
                     break;
                 case west:
-                    if(pl[1] - i < 0){
+                    if (pl[1] - i < 0) {
                         return false;
-                    }else if (this.field.get(pl[0] ).get(pl[1]- i).getShip() != null){
+                    } else if (this.field.get(pl[0]).get(pl[1] - i).getShip() != null) {
                         return false;
-                    }else{this.field.get(pl[0] ).get(pl[1]- i).setShip(Ship);}                                                             ///xor is false xor true = true
+                    } else {
+                        this.field.get(pl[0]).get(pl[1] - i).setShip(Ship);
+                    }                                                             ///xor is false xor true = true
                     break;
                 case south:
-                    if(pl[0] + i < 0){
+                    if(pl[0] + i > cols - 1){
                         return false;
-                    }else if (this.field.get(pl[0]+ i).get(pl[1] ).getShip() != null){
+                    } else if (this.field.get(pl[0]+ i).get(pl[1] ).getShip() != null){
                         return false;
-                    }else{this.field.get(pl[0]+ i).get(pl[1] ).setShip(Ship);}                                                             ///xor is false xor true = true
+                    }else{this.field.get(pl[0]+ i).get(pl[1]).setShip(Ship);}                                                             ///xor is false xor true = true
                     break;
                  }
             i++;}
-
-
         return true;
 
     }
@@ -89,7 +103,7 @@ public class Board {
     public void print(boolean hide){
         for(int i = 0; i < field.size(); i++)
         {
-            for(int j = 0; j < field.size(); j++)
+            for(int j = 0; j < field.get(i).size(); j++)
             {
                 System.out.print(" ");
                 if (hide == false){
@@ -97,7 +111,7 @@ public class Board {
                 }else{
                     if (field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == false){System.out.println("~");
                     }else if(field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == true){System.out.println(field.get(i).get(j).getDispChar());
-                    }
+                    }else if(field.get(i).get(j).getShip() == null && field.get(i).get(j).getHit() == true){System.out.println("X");}
                 }
                 System.out.print(" ");
             }
@@ -111,7 +125,7 @@ public class Board {
         B.setCols(this.getCols());
         for (int i = 0; i < field.size(); i++) {
             ///B.getField().add(new ArrayList());
-            for (int j = 0; j < field.size(); j++) {
+            for (int j = 0; j < field.get(i).size(); j++) {
 
                 B.getField().get(i).add(this.field.get(i).get(j).Copy());
             }
@@ -124,7 +138,7 @@ public class Board {
     public void Paste(Board nBoard){
         for (int i = 0; i < field.size(); i++) {
             ///B.getField().add(new ArrayList());
-            for (int j = 0; j < field.size(); j++) {
+            for (int j = 0; j < field.get(i).size(); j++) {
                 this.field.get(i).set(j, nBoard.getField().get(i).get(j).Copy());
             }
         }

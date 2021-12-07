@@ -15,13 +15,16 @@ public class BattleShip {
 
         boolean win = false;
         while(win = false){
-            ///pl_shoot(Players[]);
+            for(player P: Players) {
+                pl_shoot(P);
+            }
         }
 
     }
 
     public static void pl_shoot(player Pl){
         Pl.getBoard().print(true);
+
     }
 
     public static ArrayList<player> getPlayers(Scanner s){
@@ -151,7 +154,6 @@ public class BattleShip {
                     int[] z = s.getOrigin();
                     System.out.println("Cannot place ship here: " + z[0] + "," + z[1]);
                     tempBoard.Paste(play.getBoard());
-                    s.getOrigin();
                     inp = "";
                 }else if (acceptible == true) {
                     tempBoard.placeShip(s);
