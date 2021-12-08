@@ -109,9 +109,10 @@ public class Board {
                 if (hide == false){
                     System.out.print(field.get(i).get(j).getDispChar());
                 }else{
-                    if (field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == false){System.out.println("~");
-                    }else if(field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == true){System.out.println(field.get(i).get(j).getDispChar());
-                    }else if(field.get(i).get(j).getShip() == null && field.get(i).get(j).getHit() == true){System.out.println("X");}
+                    if(field.get(i).get(j).getShip() == null && field.get(i).get(j).getHit() == false){System.out.print("~");}
+                    else if (field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == false){System.out.print("~");}
+                    else if(field.get(i).get(j).getShip() == null && field.get(i).get(j).getHit() == true){System.out.print("o");}
+                    else if(field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == true){System.out.print("X");}
                 }
                 System.out.print(" ");
             }

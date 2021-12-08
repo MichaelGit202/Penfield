@@ -1,6 +1,7 @@
 package Michael.Penfield;
 
 public class ship {
+    private int damage;
     private char dspChar;
     private int origin[] = new int[2];
     private ship.direction ShipDirection;
@@ -9,6 +10,15 @@ public class ship {
 
     public int getLength() {
         return length;
+    }
+
+    public void addDamage(){
+        this.damage += 1;
+    }
+
+    public boolean checkdead(){
+        if (this.damage == this.length){return true;}
+        return false;
     }
 
 

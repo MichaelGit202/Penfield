@@ -24,6 +24,7 @@ public class Cell {
 
     public void setHit(boolean hit) {
         this.hit = hit;
+        this.Ship.addDamage();
     }
 
     public char getDispChar() {

@@ -7,30 +7,39 @@ public class BattleShip {
 
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
-        ArrayList<player> Players = getPlayers(input);
+        ArrayList<player> Players = null;
+        Players = getPlayers(input);
 
         System.out.println("Number of ships:");
         int amount = input.nextInt();
         placeBoats(Players, amount, input);
-
         boolean win = false;
-        while(win = false){
+        while(win == false){
             for(player P: Players) {
-                for (int i = 0; i < Players.size(); i++){}
-                pl_shoot(P, input);
+                int i = 0;
+                while (i < Players.size() ) {
+                        pl_shoot(P, input, Players.get(i));
+                        i++;
+                    }
+                }
             }
-        }
 
     }
 
-    public static void pl_shoot(player Pl,Scanner input){
+    public static void pl_shoot(player Pl,Scanner input, player victim){
         Pl.getBoard().print(true);
-        int inp[] = null;
+        int inp[] = {0,0};
+        System.out.println(Pl.getName());
+        System.out.println("Your board");
+        Pl.getBoard().print(false);
+        System.out.println(victim.getName());
+        victim.getBoard().print(true);
         System.out.println("Cols");
         inp[0] = input.nextInt();
         System.out.println("Rows");
         inp[1] = input.nextInt();
-
+        victim.getBoard().getField().get(inp[0]).get(inp[1]).setHit(true);
+        victim.getBoard().getField().get(inp[0]).get(inp[1]).getShip();
     }
 
     public static ArrayList<player> getPlayers(Scanner s){
@@ -58,6 +67,7 @@ public class BattleShip {
 
             for(int j = 0; j < amount; ){
                 Boolean good = true;
+                System.out.println(players.get(i).getName());
                 System.out.println("Place the destroyer: D\nPlace the cruiser: C\nPlace the battleship:B \nPlace the submarine:S \nPlace the carrier: K");
                 String inp = "";
                 inp = input.next();
@@ -103,7 +113,7 @@ public class BattleShip {
                             j++;
                             break;
                     }
-                    ///we are right here make it place all types of the ship
+
 
                 }
             }
@@ -115,12 +125,23 @@ public class BattleShip {
         Board tempBoard = new Board(play.getBoard().getRows(), play.getBoard().getCols());///play.getBoard().Copy();
         tempBoard.Paste(play.getBoard());
         play.getBoard().print(false);
-        System.out.println("Place at a specific spot: rows, colums");
-        System.out.println("Rows:");
+        boolean j = false;
         int[] tmp = s.getOrigin();
-        tmp[0] = input.nextInt();
-        System.out.println("Colums:");
-        tmp[1] = input.nextInt();
+        while (j == false) {
+            System.out.println("Place at a specific spot: rows, colums");
+            System.out.println("Rows:");
+            tmp[0] = input.nextInt();
+            if(tmp[0] < play.getBoard().getCols() - 1){
+                j = true;
+            }
+            System.out.println("Colums:");
+            tmp[1] = input.nextInt();
+            if (tmp[0] > 0){
+                j = true;
+            }
+        }
+
+
         boolean chk = false;
         while (chk == false) {
 
