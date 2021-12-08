@@ -16,21 +16,23 @@ public class BattleShip {
         boolean win = false;
         while(win = false){
             for(player P: Players) {
-                for (int i = 0; i < Players.size(); i++){}
-                pl_shoot(P, input);
+                int i = 0;
+                while (i < Players.size() ){}
+                    pl_shoot(P, input, Players.get(i));
+                    i++;
             }
         }
 
     }
 
-    public static void pl_shoot(player Pl,Scanner input){
+    public static void pl_shoot(player Pl,Scanner input, player victim){
         Pl.getBoard().print(true);
         int inp[] = null;
         System.out.println("Cols");
         inp[0] = input.nextInt();
         System.out.println("Rows");
         inp[1] = input.nextInt();
-
+        victim.getBoard().getField().get(inp[0]).get(inp[1]).setHit(true);
     }
 
     public static ArrayList<player> getPlayers(Scanner s){
