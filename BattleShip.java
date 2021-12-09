@@ -17,30 +17,74 @@ public class BattleShip {
         while(win == false){
             for(player P: Players) {
                 int i = 0;
-                while (i < Players.size() ) {
+                if(Players.size() == 1){
+                    win = true;
+                    System.out.println("Nice job " + P + ", you killed them all");
+                }
+                if(P.getLost() == false){
+                    while (i < Players.size()) {
                         pl_shoot(P, input, Players.get(i));
-                        i++;
+                        if(Players.get(i).getLost() == true){
+                            Players.remove(i);
+                        }else{
+                            i++;
+                        }
                     }
                 }
             }
-
+        }
     }
+
 
     public static void pl_shoot(player Pl,Scanner input, player victim){
-        Pl.getBoard().print(true);
-        int inp[] = {0,0};
-        System.out.println(Pl.getName());
-        System.out.println("Your board");
-        Pl.getBoard().print(false);
-        System.out.println(victim.getName());
-        victim.getBoard().print(true);
-        System.out.println("Cols");
-        inp[0] = input.nextInt();
-        System.out.println("Rows");
-        inp[1] = input.nextInt();
-        victim.getBoard().getField().get(inp[0]).get(inp[1]).setHit(true);
-        victim.getBoard().getField().get(inp[0]).get(inp[1]).getShip();
+        boolean j = false;
+        while (j == false){
+            Pl.getBoard().print(true);
+            int inp[] = {0,0};
+            System.out.println(Pl.getName());
+            System.out.println("Your board");
+            Pl.getBoard().print(false);
+            System.out.println(victim.getName());
+            victim.getBoard().print(true);
+            System.out.println("Cols");
+            inp[0] = input.nextInt();
+            System.out.println("Rows");
+            inp[1] = input.nextInt();
+            if (inp[0] < 0 || inp[1] > 0
+                    ||inp[0] > victim.getBoard().getCols() - 1
+                    || inp[1] > victim.getBoard().getRows() - 1){
+                j = false;
+                System.out.println("Out of bounds of the board try again");
+            }else if(victim.getBoard().getField().get(inp[0]).get(inp[1]).getHit() == true){
+                System.out.println("You already shot at: " + inp[0] + "," + inp[1]);
+            }else{
+                j = true;
+                boolean k = victim.getBoard().getField().get(inp[0]).get(inp[1]).getShip().addDamage();
+                if(k == true){
+                    System.out.println("You sank: " + victim.getName() + "'s " + victim.getBoard().getField().get(inp[0]).get(inp[1]).getShip().getModel());
+                    victim.setLost(checkloss(victim));
+                }
+            }
+
+        }
+
     }
+
+    public static boolean checkloss(player p){
+        for (int i = 0; i < p.getBoard().getField().size(); i++) {
+            for (int j = 0; j < p.getBoard().getField().get(i).size(); j++) {
+                if(p.getBoard().getField().get(i).get(j).getShip().checkDead() == false){
+                    return true;
+                }
+            }
+        }
+        return  true;
+    }
+
+
+
+
+
 
     public static ArrayList<player> getPlayers(Scanner s){
         ArrayList<player> pl = new ArrayList<player>();
@@ -78,13 +122,13 @@ public class BattleShip {
                     good = false;                           ///check that it is a valid ship
                 }
 
-                if (alreadySelected.size() != 0) {
-                    for (int a = 0; a < alreadySelected.size(); ) {
-                        if (inp == alreadySelected.get(a)){     ///checks if they already selecte a ship
-                            good = false;
-                        }
-                    }
-                }
+                ////if (alreadySelected.size() != 0) {
+                ////    for (int a = 0; a < alreadySelected.size(); ) {
+                ////        if (inp == alreadySelected.get(a)){     ///checks if they already selecte a ship not work
+                ////            good = false;
+                ////        }
+                ////    }
+                ////}
                 if (good == true) {
                     switch (inp) {
                         case "D":

@@ -107,11 +107,16 @@ public class Board {
             {
                 System.out.print(" ");
                 if (hide == false){
-                    System.out.print(field.get(i).get(j).getDispChar());
+                    if (field.get(i).get(j).getHit() == true){
+                        System.out.print("X");
+                    }else{
+                        System.out.print(field.get(i).get(j).getDispChar());
+                    }
                 }else{
                     if(field.get(i).get(j).getShip() == null && field.get(i).get(j).getHit() == false){System.out.print("~");}
                     else if (field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == false){System.out.print("~");}
                     else if(field.get(i).get(j).getShip() == null && field.get(i).get(j).getHit() == true){System.out.print("o");}
+                    else if(field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == true && field.get(i).get(j).getShip().checkDead() == true){System.out.print(field.get(i).get(j).getDispChar());}
                     else if(field.get(i).get(j).getShip() != null && field.get(i).get(j).getHit() == true){System.out.print("X");}
                 }
                 System.out.print(" ");
@@ -120,20 +125,20 @@ public class Board {
         }
     }
 
-    public Board Copy(){
-        Board B = new Board(this.getRows(), this.getCols());
-        B.setRows(this.getRows());
-        B.setCols(this.getCols());
-        for (int i = 0; i < field.size(); i++) {
-            ///B.getField().add(new ArrayList());
-            for (int j = 0; j < field.get(i).size(); j++) {
-
-                B.getField().get(i).add(this.field.get(i).get(j).Copy());
-            }
-        }
-
-        return B;
-    }
+    ////public Board Copy(){
+    ////    Board B = new Board(this.getRows(), this.getCols());
+    ////    B.setRows(this.getRows());
+    ////    B.setCols(this.getCols());
+    ////    for (int i = 0; i < field.size(); i++) {
+    ////        ///B.getField().add(new ArrayList());
+    ////        for (int j = 0; j < field.get(i).size(); j++) {
+////
+    ////            B.getField().get(i).add(this.field.get(i).get(j).Copy());
+    ////        }
+    ////    }
+////
+    ////    return B;
+    ////}
 
 
     public void Paste(Board nBoard){

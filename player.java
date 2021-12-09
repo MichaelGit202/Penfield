@@ -1,6 +1,7 @@
 package Michael.Penfield;
 
 public class player {
+    private boolean lost;
     private String Name;
     private Board board;
     public Board getBoard() {
@@ -11,6 +12,13 @@ public class player {
         this.board = board;
     }
 
+    public boolean getLost() {
+        return lost;
+    }
+
+    public void setLost(boolean lost) {
+        this.lost = lost;
+    }
 
 
     public String getName() {

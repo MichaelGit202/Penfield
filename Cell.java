@@ -22,9 +22,9 @@ public class Cell {
         return hit;
     }
 
-    public void setHit(boolean hit) {
+    public boolean setHit(boolean hit) {
         this.hit = hit;
-        this.Ship.addDamage();
+        return this.Ship.addDamage();  ///bad practice to return a methods return
     }
 
     public char getDispChar() {
@@ -38,7 +38,7 @@ public class Cell {
     public Cell Copy(){
         Cell C = new Cell();
         C.setShip(this.Ship);
-        C.setHit(this.hit);
+        C.hit= this.hit;///had to do this because of confusion with the purpose behind set 'sethit'
         return C;
     }
 
