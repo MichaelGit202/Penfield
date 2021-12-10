@@ -11,7 +11,7 @@ public class Cell {
     }
 
     public ship getShip() {
-        return Ship;
+        return this.Ship;
     }
 
     public void setShip(ship ship) {
@@ -19,12 +19,15 @@ public class Cell {
     }
 
     public boolean getHit() {
-        return hit;
+        return this.hit;
     }
 
     public boolean setHit(boolean hit) {
         this.hit = hit;
-        return this.Ship.addDamage();  ///bad practice to return a methods return
+        if (this.Ship != null){
+            return this.Ship.addDamage();  ///bad practice to return a methods return
+        }
+            return false;
     }
 
     public char getDispChar() {

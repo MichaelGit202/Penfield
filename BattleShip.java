@@ -17,22 +17,33 @@ public class BattleShip {
         while(win == false){
             for(player P: Players) {
                 int i = 0;
-                if(Players.size() == 1){
+                if(checkwin(Players) == true){
                     win = true;
                     System.out.println("Nice job " + P + ", you killed them all");
                 }
                 if(P.getLost() == false){
                     while (i < Players.size()) {
                         pl_shoot(P, input, Players.get(i));
-                        if(Players.get(i).getLost() == true){
-                            Players.remove(i);
-                        }else{
-                            i++;
+                        i++;
                         }
                     }
                 }
             }
         }
+
+
+    public static boolean checkwin(ArrayList<player> Players){
+        int g = 0;
+        for(player P: Players){
+            if (P.getLost() == false){
+                g += 1;
+            }
+        }
+
+        if(g <= 1){
+            return true;
+        }
+        return false;
     }
 
 
@@ -50,7 +61,7 @@ public class BattleShip {
             inp[0] = input.nextInt();
             System.out.println("Rows");
             inp[1] = input.nextInt();
-            if (inp[0] < 0 || inp[1] > 0
+            if (inp[0] < 0 || inp[1] < 0
                     ||inp[0] > victim.getBoard().getCols() - 1
                     || inp[1] > victim.getBoard().getRows() - 1){
                 j = false;
@@ -59,7 +70,7 @@ public class BattleShip {
                 System.out.println("You already shot at: " + inp[0] + "," + inp[1]);
             }else{
                 j = true;
-                boolean k = victim.getBoard().getField().get(inp[0]).get(inp[1]).getShip().addDamage();
+                boolean k = victim.getBoard().getField().get(inp[0]).get(inp[1]).setHit(true);
                 if(k == true){
                     System.out.println("You sank: " + victim.getName() + "'s " + victim.getBoard().getField().get(inp[0]).get(inp[1]).getShip().getModel());
                     victim.setLost(checkloss(victim));
@@ -73,8 +84,10 @@ public class BattleShip {
     public static boolean checkloss(player p){
         for (int i = 0; i < p.getBoard().getField().size(); i++) {
             for (int j = 0; j < p.getBoard().getField().get(i).size(); j++) {
-                if(p.getBoard().getField().get(i).get(j).getShip().checkDead() == false){
-                    return true;
+                if (p.getBoard().getField().get(i).get(j).getShip() != null){
+                    if(p.getBoard().getField().get(i).get(j).getShip().checkDead() == false){
+                        return true;
+                    }
                 }
             }
         }
